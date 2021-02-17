@@ -11,3 +11,5 @@
 2. get url
    inspect di network; 
    get, param
+   
+https://medium.com/@akhisyabab/how-to-web-or-api-scraping-become-a-developer-scraper-minimal-things-that-must-be-known-bed7fe4e17d8
