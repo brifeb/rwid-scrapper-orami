@@ -58,9 +58,24 @@ def get_detail(url_detail):
 
     soup = BeautifulSoup(res.text, "html.parser")
     title = soup.find('title').text.strip()
-    print(title)
+    price = soup.find('h4', attrs={'class':'card-price'}).text.strip()
+    stock = soup.find('span', attrs={'class':'card-stock'}).text.strip().replace('stock: ','')
+    category = soup.find('span', attrs={'class': 'card-category'}).text.strip().replace('category: ', '')
+    description = soup.find('p', attrs={'class': 'card-text'}).text.strip().replace('Description: ', '')
 
 
+    dict_data = {
+        'title' : title,
+        'price' : price,
+        'stock' : stock,
+        'category' : category,
+        'description' : description
+    }
+
+    print(dict_data)
+
+    with open(f"./result{url_detail}.json", "w") as outfile:
+        json.dump(dict_data,outfile)
 
 
 def create_csv():
@@ -82,8 +97,9 @@ def run():
         all_url = json.load(json_file)
 
     print(all_url[0])
+    for url in all_url:
+        get_detail(url)
 
-    get_detail(all_url[0])
     create_csv()
 
 
